@@ -1,18 +1,18 @@
 const fs = require('fs')
-const path = require('path')
+const path4444 = require('path')
 const express = require('express')
-const app = express()
+const app444 = express()
 const crypto = require('crypto')
 const urlencodedParser = express.urlencoded({extended: false});
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
-app.use(cookieParser());
-app.use("/image", express.static('image'))
-app.use("/script", express.static('script'))
-app.use("/css", express.static('css'))
+app444.use(cookieParser());
+app444.use("/image", express.static('image'))
+app444.use("/script", express.static('script'))
+app444.use("/css", express.static('css'))
 
-app.get('/v1/authorization', function (req, res) {
+app444.get('/v1/authorization', function (req, res) {
     res.sendFile(__dirname + '/views/authorization.html')
 });
 
@@ -30,11 +30,11 @@ const authorization = (req, res, next) => {
         return res.sendStatus(403);
     }
 };
-app.get('/', function(req, res){
+app444.get('/', function(req, res){
     res.sendFile(__dirname + '/views/index.html')
 });
 
-app.post("/v1/authorization",
+app444.post("/v1/authorization",
     urlencodedParser,
     function (req, res) {
         let sha1 = crypto.createHash('sha1')
@@ -50,18 +50,18 @@ app.post("/v1/authorization",
             .redirect("/v1/cars")
 });
 
-app.get("/v1/cars", authorization, (req, res) => {
+app444.get("/v1/cars", authorization, (req, res) => {
     res.sendFile(__dirname + '/views/cars.html')
 });
 
-app.get("/SignOut", authorization, (req, res) => {
+app444.get("/SignOut", authorization, (req, res) => {
     return res
         .clearCookie("access_token")
         .redirect('/')
 });
 
-app.get('*', function(req, res){
+app444.get('*', function(req, res){
     res.status(404).sendFile(__dirname + '/views/404.html')
 });
 
-app.listen(8080)
+app444.listen(8080)
